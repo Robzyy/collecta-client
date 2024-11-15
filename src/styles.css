@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* I call this little trick "Make it feel like a native app" */
+* {
+    user-select: none;
+}
+
+/* I call this little trick "Why Google?" */
+.material-symbols-outlined:not(.flex *) {
+    position: relative;
+    top: 2px;
+}

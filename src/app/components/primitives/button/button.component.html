@@ -1,0 +1,9 @@
+<button class="px-4 py-2 rounded-full transition-colors flex items-center justify-center gap-2 outline-none w-full text-text-100" [class]="buttonClasses" (click)="onClickHandler()">
+    @if (leadingIcon) {
+        <span class="material-symbols-outlined">{{leadingIcon}}</span>
+    }
+    <p>{{label}}</p>
+    @if (trailingIcon) {
+        <span class="material-symbols-outlined">{{trailingIcon}}</span>
+    }
+</button>

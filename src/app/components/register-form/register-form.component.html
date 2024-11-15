@@ -1,0 +1,39 @@
+<div class="flex justify-center items-center h-screen bg-background-950">
+  <div class="space-y-4 w-full max-w-md">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+      <InputTextComponent
+        formControlName="username"
+        label="Username"
+        type="text"
+        autoComplete="off"
+        [error]="getUsernameErrors" />
+      <InputTextComponent
+        formControlName="email"
+        label="Email"
+        type="email"
+        autoComplete="on"
+        [error]="getEmailErrors" />
+      <InputTextComponent
+        formControlName="password"
+        label="Password"
+        type="password"
+        autoComplete="off"
+        [error]="getPasswordErrors" />
+      <InputTextComponent
+        formControlName="confirmPassword"
+        label="Confirm Password"
+        type="password"
+        autoComplete="off"
+        [error]="getConfirmPasswordErrors" />
+      <ButtonComponent
+        label="Create account"
+        [variant]="registerForm.valid ? 'primary' : 'disabled'"
+        fontWeight="medium"
+        callbackFunction="onSubmit()"/>
+    </form>
+    <div class="text-sm">
+      <p class="text-text-100">Already have an account?</p>
+      <a href="/login" class="text-text-400 font-medium">Login</a>
+    </div>
+  </div>
+</div>
