@@ -1,0 +1,65 @@
+<div class="m-4 flex flex-col gap-4">
+  <!-- Slider -->
+  <div class="border-2 rounded-lg border-text-900 p-4">
+    <p>Slider</p>
+    <div class="flex gap-4">
+      <div class="w-full">
+        <p class="text-sm">Min: {{ sliders[0].min }} / Max: {{ sliders[0].max }} / Step: {{ sliders[0].step }} / Value:
+          {{ sliders[0].value }}</p>
+        <SliderComponent [value]="sliders[0].value" [min]="sliders[0].min" [max]="sliders[0].max"
+          [step]="sliders[0].step" (valueChange)="sliders[0].callback($event)" />
+      </div>
+    </div>
+    <div class="flex gap-4">
+      <div class="w-full">
+        <p class="text-sm">Min: {{ sliders[1].min }} / Max: {{ sliders[1].max }} / Step: {{ sliders[1].step }} / Value:
+          {{ sliders[1].value }}</p>
+        <SliderComponent [value]="sliders[1].value" [min]="sliders[1].min" [max]="sliders[1].max"
+          [step]="sliders[1].step" (valueChange)="sliders[1].callback($event)" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Number input -->
+  <div class="border-2 rounded-lg border-text-900 p-4">
+    <p>Number input</p>
+    <div class="flex gap-4">
+      <NumberInputComponent [value]="numberInputValues[0].number" [hasButtons]="true" [min]="0" [max]="100"
+        (valueChange)="numberInputValues[0].callback($event)" />
+      <NumberInputComponent [value]="numberInputValues[1].number" [min]="0" [max]="100"
+        (valueChange)="numberInputValues[1].callback($event)" />
+    </div>
+  </div>
+
+  <!-- Button -->
+  <div class="border-2 rounded-lg border-text-900 p-4">
+    <p>Button</p>
+    <div class="flex gap-2 items-center">
+      <ButtonComponent label="Click me" (callbackFunction)="logClick()" />
+      <ButtonComponent label="Click me" size="small" variant="secondary" (callbackFunction)="logClick()" />
+      <ButtonComponent label="Click me" size="small" variant="disabled" (callbackFunction)="logClick()" />
+    </div>
+  </div>
+
+  <!-- Text input -->
+  <div class="border-2 rounded-lg border-text-900 p-4">
+    <p>Text input</p>
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <InputTextComponent label="Input text" type="text" formControlName="inputText" />
+    </form>
+  </div>
+
+  <!-- Icon button -->
+  <div class="border-2 rounded-lg border-text-900 p-4">
+    <p>Icon button</p>
+    <div class="flex gap-2 items-center">
+      <IconButtonComponent icon="add" />
+      <IconButtonComponent icon="add" size="small" />
+    </div>
+  </div>
+
+  <!-- Scroll test -->
+  <div class="border-2 h-[500px] rounded-lg border-text-900 p-4">
+    <p>Scroll test</p>
+  </div>
+</div>

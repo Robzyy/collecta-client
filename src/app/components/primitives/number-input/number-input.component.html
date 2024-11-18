@@ -1,0 +1,24 @@
+<div
+  class="rounded-md w-full p-1 border-2 border-primary-900 hover:border-primary-800 focus:border-primary-700 transition-colors flex items-center gap-1">
+  @if (hasButtons) {
+  <span
+    class="p-2 rounded size-6 hover:bg-primary-900 active:bg-primary-800 transition-colors flex items-center justify-center"
+    (click)="decrement()">
+    <span class="material-symbols-outlined">remove</span>
+  </span>
+  }
+  <input type="number" [min]="min" [max]="max" [value]="value" (input)="onInput($event)"
+    class="outline-none w-10 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+    [class.text-center]="hasButtons" />
+  @if (hasButtons) {
+  <span
+    class="p-2 rounded size-6 hover:bg-primary-900 active:bg-primary-800 transition-colors flex items-center justify-center"
+    (click)="increment()">
+    <span class="material-symbols-outlined">add</span>
+  </span>
+  }
+</div>
+
+<ng-template #debug>
+
+</ng-template>
