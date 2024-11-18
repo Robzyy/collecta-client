@@ -38,6 +38,8 @@ export class ButtonComponent {
   }
 
   onClickHandler() {
-    this.callbackFunction.emit();
+    if (this.variant !== 'disabled') {
+      this.callbackFunction.emit();
+    }
   }
 }

@@ -5,9 +5,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <button class="p-2 rounded-full size-12 hover:bg-primary-900 active:bg-primary-800 transition-colors flex items-center justify-center"
+    <button class="p-2 rounded-full size-12 hover:bg-primary-900 active:bg-primary-800 transition-all flex items-center justify-center outline-none"
     [class.size-9]="size == 'small'"
     [class.size-12]="size == 'default'"
+    [class.hover:rotate-[60deg]]="icon == 'settings'"
+    [class.active:rotate-[90deg]]="icon == 'settings'"
     title="{{title}}" (click)="onClickHandler()">
         <span class="material-symbols-outlined">{{icon}}</span>
     </button>
