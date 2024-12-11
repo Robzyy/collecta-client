@@ -1,24 +1,31 @@
 <div
-  class="rounded-md w-full p-1 border-2 border-primary-900 hover:border-primary-800 focus:border-primary-700 transition-colors flex items-center gap-1">
+  class="flex w-full items-center gap-1 rounded-md border-2 border-primary-900 p-1 transition-colors hover:border-primary-800 focus:border-primary-700"
+>
   @if (hasButtons) {
-  <span
-    class="p-2 rounded size-6 hover:bg-primary-900 active:bg-primary-800 transition-colors flex items-center justify-center"
-    (click)="decrement()">
-    <span class="material-symbols-outlined">remove</span>
-  </span>
+    <span
+      class="flex size-6 items-center justify-center rounded p-2 transition-colors hover:bg-primary-900 active:bg-primary-800"
+      (click)="decrement()"
+    >
+      <span class="material-symbols-outlined">remove</span>
+    </span>
   }
-  <input type="number" [min]="min" [max]="max" [value]="value" (input)="onInput($event)"
-    class="outline-none w-10 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-    [class.text-center]="hasButtons" />
+  <input
+    type="number"
+    [min]="min"
+    [max]="max"
+    [value]="value"
+    (input)="onInput($event)"
+    class="w-10 outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+    [class.text-center]="hasButtons"
+  />
   @if (hasButtons) {
-  <span
-    class="p-2 rounded size-6 hover:bg-primary-900 active:bg-primary-800 transition-colors flex items-center justify-center"
-    (click)="increment()">
-    <span class="material-symbols-outlined">add</span>
-  </span>
+    <span
+      class="flex size-6 items-center justify-center rounded p-2 transition-colors hover:bg-primary-900 active:bg-primary-800"
+      (click)="increment()"
+    >
+      <span class="material-symbols-outlined">add</span>
+    </span>
   }
 </div>
 
-<ng-template #debug>
-
-</ng-template>
+<ng-template #debug> </ng-template>

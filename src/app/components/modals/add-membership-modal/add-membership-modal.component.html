@@ -1,0 +1,101 @@
+<dialog
+  #membershipDialog
+  class="backdrop:bg-text-950/50 w-full max-w-2xl rounded-lg bg-background-200 p-0 shadow-lg"
+>
+  <div class="p-6">
+    <div class="mb-4 flex items-center justify-between">
+      <h2 class="text-xl font-semibold">Add Membership</h2>
+      <IconButtonComponent
+        icon="close"
+        variant="iconOnly"
+        size="small"
+        (callbackFunction)="close()"
+      ></IconButtonComponent>
+    </div>
+
+    <form
+      [formGroup]="membershipForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col gap-4"
+    >
+      <InputTextComponent
+        formControlName="title"
+        label="Title"
+        type="text"
+        required="true"
+      />
+
+      <InputTextComponent
+        formControlName="description"
+        label="Description"
+        type="text"
+      />
+
+      <InputTextComponent
+        formControlName="startDate"
+        label="Start Date"
+        type="date"
+        required="true"
+      />
+
+      <div class="grid grid-cols-2 gap-4">
+        <InputTextComponent
+          formControlName="cost"
+          label="Cost"
+          type="number"
+          step="0.01"
+        />
+
+        <InputTextComponent
+          formControlName="currency"
+          label="Currency"
+          type="text"
+        />
+      </div>
+
+      <div formGroupName="recurrencePattern" class="space-y-4">
+        <h3 class="text-lg font-medium">Recurrence Pattern</h3>
+
+        <div class="grid grid-cols-2 gap-4">
+          <select
+            formControlName="frequency"
+            class="rounded-md border-2 border-background-500 outline-none transition-colors hover:border-background-600 focus:border-background-700"
+          >
+            <option *ngFor="let freq of frequencies" [value]="freq.value">
+              {{ freq.label }}
+            </option>
+          </select>
+
+          <InputTextComponent
+            formControlName="interval"
+            label="Interval"
+            type="number"
+            min="1"
+          />
+        </div>
+
+        <InputTextComponent
+          formControlName="endAfterOccurrences"
+          label="End After (occurrences)"
+          type="number"
+        />
+      </div>
+
+      <div class="mt-4 flex justify-end gap-2">
+        <ButtonComponent
+          label="Cancel"
+          variant="secondary"
+          fontWeight="medium"
+          (callbackFunction)="close()"
+        />
+        <ButtonComponent
+          label="Add Membership"
+          variant="primary"
+          fontWeight="medium"
+          type="submit"
+          [variant]="!membershipForm.valid ? 'disabled' : 'primary'"
+        />
+      </div>
+    </form>
+  </div>
+</dialog>

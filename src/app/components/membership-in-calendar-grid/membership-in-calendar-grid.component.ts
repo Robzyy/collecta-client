@@ -1,14 +1,13 @@
 import { Component, Input } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Membership } from '../../interfaces/membership.interface';
 
 @Component({
   selector: 'MembershipInCalendarGrid',
   standalone: true,
-  imports: [],
-  templateUrl: './membership-in-calendar-grid.component.html'
+  imports: [CommonModule, CurrencyPipe],
+  templateUrl: './membership-in-calendar-grid.component.html',
 })
 export class MembershipInCalendarGridComponent {
   @Input() memberships!: Membership[];
-
 }

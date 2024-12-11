@@ -6,7 +6,7 @@ import { Membership } from '../../interfaces/membership.interface';
   selector: 'MembershipComponent',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './membership.component.html'
+  templateUrl: './membership.component.html',
 })
 export class MembershipComponent {
   @Input() memberships!: Membership[];
@@ -16,49 +16,46 @@ export class MembershipComponent {
 
     let outputString: string = '';
     switch (membership.recurrencePattern?.frequency) {
-      case 'daily':
-        {
-          if (membership.recurrencePattern?.interval === 1) {
-            outputString = "Renews daily";
-          } else {
-            outputString = `Renews every ${membership.recurrencePattern?.interval} days`;
-          }
-          break;
+      case 'daily': {
+        if (membership.recurrencePattern?.interval === 1) {
+          outputString = 'Renews daily';
+        } else {
+          outputString = `Renews every ${membership.recurrencePattern?.interval} days`;
         }
-      case 'weekly':
-        {
-          if (membership.recurrencePattern?.interval === 1) {
-            outputString = "Renews weekly";
-          } else {
-            outputString = `Renews every ${membership.recurrencePattern?.interval} weeks`;
-          }
-          break;
+        break;
+      }
+      case 'weekly': {
+        if (membership.recurrencePattern?.interval === 1) {
+          outputString = 'Renews weekly';
+        } else {
+          outputString = `Renews every ${membership.recurrencePattern?.interval} weeks`;
         }
-      case 'monthly':
-        {
-          if (membership.recurrencePattern?.interval === 1) {
-            outputString = "Renews monthly";
-          } else {
-            outputString = `Renews every ${membership.recurrencePattern?.interval} months`;
-          }
-          break;
+        break;
+      }
+      case 'monthly': {
+        if (membership.recurrencePattern?.interval === 1) {
+          outputString = 'Renews monthly';
+        } else {
+          outputString = `Renews every ${membership.recurrencePattern?.interval} months`;
         }
-      case 'yearly':
-        {
-          if (membership.recurrencePattern?.interval === 1) {
-            outputString = "Renews yearly";
-          } else {
-            outputString = `Renews every ${membership.recurrencePattern?.interval} years`;
-          }
-          break;
+        break;
+      }
+      case 'yearly': {
+        if (membership.recurrencePattern?.interval === 1) {
+          outputString = 'Renews yearly';
+        } else {
+          outputString = `Renews every ${membership.recurrencePattern?.interval} years`;
         }
-      case 'freeTrial':
-        {
-          outputString = "This is a free trial, to end on " + membership.recurrencePattern?.endByDate?.toLocaleDateString();
-          break;
-        }
+        break;
+      }
+      case 'freeTrial': {
+        outputString =
+          'This is a free trial, to end on ' +
+          membership.recurrencePattern?.endAfterOccurrences;
+        break;
+      }
       default: {
-        outputString = "UNKNOWN FREQUENCY";
+        outputString = 'UNKNOWN FREQUENCY';
       }
     }
     return outputString;

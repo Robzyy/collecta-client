@@ -1,0 +1,43 @@
+<dialog
+  #settingsDialog
+  class="backdrop:bg-text-950/50 w-full max-w-2xl rounded-lg bg-background-200 p-0 shadow-lg"
+>
+  <div class="p-6">
+    <div class="mb-8 flex items-center justify-between">
+      <h2 class="text-xl font-semibold">Settings</h2>
+      <IconButtonComponent
+        icon="close"
+        variant="iconOnly"
+        size="small"
+        (callbackFunction)="close()"
+      ></IconButtonComponent>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center justify-between rounded-2xl bg-background-300 border-2 border-background-600 p-4">
+        <div class="space-y-1">
+          <h3 class="text-lg font-semibold">{{ displayName }}</h3>
+          <p class="text-sm text-text-900">{{ email }}</p>
+        </div>
+        <ButtonComponent
+          label="Logout"
+          leadingIcon="logout"
+          variant="alert"
+          fontWeight="medium"
+          (callbackFunction)="logout()"
+        />
+      </div>
+    </div>
+
+    <div class="mt-4 flex items-center justify-between">
+      <p class="text-sm">Made with ❤️ by Robzyy</p>
+      <ButtonComponent
+        label="Source Code"
+        leadingIcon="code"
+        size="small"
+        fontWeight="medium"
+        (callbackFunction)="otherFunction()"
+      />
+    </div>
+  </div>
+</dialog>

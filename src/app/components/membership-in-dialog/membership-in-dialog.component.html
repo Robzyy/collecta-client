@@ -1,28 +1,48 @@
-<div class="p-4 bg-background-900 rounded-lg">
-    @for (membership of memberships; track membership.id) {
-        <div class="space-y-2">
-            <!-- Title and Cost -->
-            <div class="flex justify-between items-start">
-                <h3 class="text-lg font-semibold">{{ membership.title }}</h3>
-                <div class="text-right">
-                    <span class="text-lg font-medium ">
-                        {{ membership.cost | currency:membership.currency }}
-                    </span>
-                    <div class="text-sm">
-                        {{ membership.recurrencePattern?.frequency }}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Description -->
-            @if (membership.description) {
-                <p class="">{{ membership.description }}</p>
-            }
-
-            <!-- Recurrence Pattern -->
-            <div class="text-sm">
-                {{ printFrequency(membership) }}
-            </div>
+<div class="rounded-2xl bg-background-300 border-2 border-background-600 p-4">
+  @for (membership of memberships; track membership.id) {
+    <div class="space-y-2">
+      <!-- Title and Cost -->
+      <div class="flex items-start justify-between">
+        <h3 class="text-lg font-semibold">{{ membership.title }}</h3>
+        <div class="text-right">
+          <span class="text-lg font-medium">
+            {{ membership.cost | currency: membership.currency }}
+          </span>
+          <div class="text-sm">
+            {{ membership.recurrencePattern?.frequency }}
+          </div>
         </div>
-    }
+      </div>
+
+      <!-- Description -->
+      @if (membership.description) {
+        <p class="">{{ membership.description }}</p>
+      }
+
+      <!-- Recurrence Pattern -->
+      <div class="text-sm">
+        {{ printFrequency(membership) }}
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="mt-2 flex gap-2">
+        <ButtonComponent
+          label="Modify"
+          variant="secondary"
+          leadingIcon="edit"
+          fontWeight="medium"
+          (callbackFunction)="modifyMembership(membership)"
+          class="w-full"
+        ></ButtonComponent>
+        <ButtonComponent
+          label="Delete"
+          leadingIcon="delete"
+          variant="alert"
+          fontWeight="medium"
+          (callbackFunction)="deleteMembership(membership.id)"
+        ></ButtonComponent>
+      </div>
+    </div>
+  }
 </div>
+<AddMembershipModal #membershipModal></AddMembershipModal>

@@ -1,6 +1,12 @@
-<div class="p-4 bg-background-900 rounded-lg">
-    <div class="p-4 bg-background-900 rounded-lg">
-        <h4>{{ memberships[0].title }}</h4>
-        <!-- <p>{{ memberships[0].cost | currency:memberships[0].currency }}</p> -->
-    </div>
+<div class="space-y-1">
+  @for (membership of memberships; track $index) {
+    @if ($index < 2) {
+      <div class="flex justify-between rounded-lg px-1 text-sm">
+        <div class="truncate font-medium">{{ membership.title }}</div>
+        <div>
+          {{ membership.cost | currency: membership.currency }}
+        </div>
+      </div>
+    }
+  }
 </div>

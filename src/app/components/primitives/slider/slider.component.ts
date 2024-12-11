@@ -1,16 +1,25 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+  OnDestroy,
+} from '@angular/core';
 
 @Component({
   selector: 'SliderComponent',
   standalone: true,
   imports: [],
-  templateUrl: './slider.component.html'
+  templateUrl: './slider.component.html',
 })
 export class SliderComponent implements AfterViewInit, OnDestroy {
   @Input({ required: true }) value: number = 0;
   @Input({ required: true }) min: number = 0;
   @Input({ required: true }) max: number = 100;
-  @Input({ required: true }) step: number | "any" = "any";
+  @Input({ required: true }) step: number | 'any' = 'any';
 
   @Output() valueChange = new EventEmitter<number>();
 
@@ -66,7 +75,10 @@ export class SliderComponent implements AfterViewInit, OnDestroy {
 
     this.thumb.nativeElement.classList.add('scale-x-150');
 
-    const deltaX = Math.max(0, Math.min(this.sliderWidth, event.clientX - this.sliderLeft));
+    const deltaX = Math.max(
+      0,
+      Math.min(this.sliderWidth, event.clientX - this.sliderLeft),
+    );
     const percentage = (deltaX / this.sliderWidth) * 100;
 
     const range = this.max - this.min;
@@ -85,11 +97,11 @@ export class SliderComponent implements AfterViewInit, OnDestroy {
       this.valueChange.emit(this.value);
       this.rangeInput.nativeElement.value = newValue.toString();
     }
-  }
+  };
 
   private onMouseUp = () => {
     this.isDragging = false;
     this.thumb.nativeElement.classList.remove('scale-x-150');
     this.sliderContainer.nativeElement.classList.remove('cursor-ew-resize');
-  }
+  };
 }

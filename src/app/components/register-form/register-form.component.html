@@ -1,39 +1,54 @@
-<div class="flex justify-center items-center h-screen bg-background-950">
-  <div class="space-y-4 w-full max-w-md">
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+<div class="flex h-screen items-center justify-center bg-background-950">
+  <div class="w-full max-w-md space-y-4">
+    <form
+      [formGroup]="registerForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col gap-2"
+    >
+      <!-- Display Name -->
       <InputTextComponent
-        formControlName="username"
-        label="Username"
+        formControlName="displayName"
+        label="Display Name"
         type="text"
-        autoComplete="off"
-        [error]="getUsernameErrors" />
+        autoComplete="on"
+        [error]="getDisplayNameErrors"
+      />
+      <!-- Email -->
       <InputTextComponent
         formControlName="email"
         label="Email"
         type="email"
         autoComplete="on"
-        [error]="getEmailErrors" />
+        [error]="getEmailErrors"
+      />
+      <!-- Password -->
       <InputTextComponent
         formControlName="password"
         label="Password"
         type="password"
         autoComplete="off"
-        [error]="getPasswordErrors" />
+        [error]="getPasswordErrors"
+      />
+      <!-- Confirm Password -->
       <InputTextComponent
         formControlName="confirmPassword"
         label="Confirm Password"
         type="password"
         autoComplete="off"
-        [error]="getConfirmPasswordErrors" />
+        [error]="getConfirmPasswordErrors"
+      />
+      <!-- Submit Button -->
       <ButtonComponent
         label="Create account"
         [variant]="registerForm.valid ? 'primary' : 'disabled'"
         fontWeight="medium"
-        callbackFunction="onSubmit()"/>
+        callbackFunction="onSubmit()"
+      />
     </form>
+    <!-- Login Link -->
     <div class="text-sm">
       <p class="text-text-100">Already have an account?</p>
-      <a href="/login" class="text-text-400 font-medium">Login</a>
+      <a href="/login" class="font-medium text-text-400">Login</a>
     </div>
   </div>
 </div>

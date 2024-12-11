@@ -4,11 +4,12 @@
 
 /* I call this little trick "Make it feel like a native app" */
 * {
-    user-select: none;
+  user-select: none;
 }
 
 /* I call this little trick "Why Google?" */
 .material-symbols-outlined:not(.flex *) {
-    position: relative;
-    top: 2px;
+  position: relative;
+  top: 2px;
 }
+

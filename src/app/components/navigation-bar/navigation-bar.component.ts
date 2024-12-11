@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'NavigationBar',
   standalone: true,
   imports: [],
-  templateUrl: './navigation-bar.component.html'
+  templateUrl: './navigation-bar.component.html',
 })
-export class NavigationBarComponent {
-
-}
+export class NavigationBarComponent {}

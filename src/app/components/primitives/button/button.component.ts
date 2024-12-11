@@ -4,20 +4,31 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'ButtonComponent',
   standalone: true,
   imports: [],
-  templateUrl: './button.component.html'
+  templateUrl: './button.component.html',
 })
 export class ButtonComponent {
   @Input({ required: true }) label: string = '';
-  @Input() variant: 'primary' | 'secondary' | 'disabled' = 'primary';
+  @Input() variant: 'primary' | 'secondary' | 'disabled' | 'outline' | 'alert' =
+    'primary';
   @Input() leadingIcon: string = '';
   @Input() trailingIcon: string = '';
   @Input() size: 'small' | 'default' | 'large' = 'default';
-  @Input() fontWeight: 'thin' | 'extralight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black' = 'normal';
+  @Input() fontWeight:
+    | 'thin'
+    | 'extralight'
+    | 'light'
+    | 'normal'
+    | 'medium'
+    | 'semibold'
+    | 'bold'
+    | 'extrabold'
+    | 'black' = 'normal';
   @Output() callbackFunction = new EventEmitter<void>();
 
   get buttonClasses(): string {
     const classes = [
       // Size classes
+      this.size === 'default' ? 'px-6 py-2' : '',
       this.size === 'small' ? 'text-sm px-3 py-1' : '',
       this.size === 'large' ? 'text-lg px-5 py-2' : '',
 
@@ -29,9 +40,21 @@ export class ButtonComponent {
       this.fontWeight === 'medium' ? 'font-medium' : '',
 
       // Variant classes
-      this.variant === 'primary' ? 'bg-primary-900 hover:bg-primary-800 active:bg-primary-700' : '',
-      this.variant === 'secondary' ? 'bg-secondary-800 hover:bg-secondary-700 active:bg-secondary-600' : '',
-      this.variant === 'disabled' ? 'bg-text-800 text-text-900 cursor-default' : '',
+      this.variant === 'primary'
+        ? 'bg-primary-200 hover:bg-primary-400 active:bg-primary-600 text-text-950'
+        : '',
+      this.variant === 'secondary'
+        ? 'bg-secondary-500 hover:bg-secondary-600 active:bg-secondary-700'
+        : '',
+      this.variant === 'disabled'
+        ? 'bg-primary-200 text-text-900 cursor-default'
+        : '',
+      this.variant === 'outline'
+        ? 'border border-background-600 bg-transparent hover:bg-primary-200 hover:border-primary-500 active:bg-primary-500 active:border-primary-700'
+        : '',
+      this.variant === 'alert'
+        ? 'bg-alert-500 hover:bg-alert-800 active:bg-alert-700 text-text-200'
+        : '',
     ];
 
     return classes.filter(Boolean).join(' ');

@@ -1,10 +1,26 @@
 <!-- Styling the <input type="range"> element is a unique type of horror -->
 <div class="w-full">
-  <input #rangeInput type="range" name="slider" id="slider" [min]="min" [max]="max" [step]="step" [value]="value"
-      class="hidden">
-  <div #sliderContainer class="w-full flex items-center gap-1.5">
-    <div #activeTrack class="h-3 bg-primary-700 rounded-l-full"></div>
-    <div #thumb class="h-8 w-1 hover:scale-x-150 transition-transform bg-secondary-600 rounded cursor-ew-resize" (mousedown)="onMouseDown($event)"></div>
-    <div #inactiveTrack class="flex-1 h-3 bg-background-900 rounded-r-full"></div>
+  <input
+    #rangeInput
+    type="range"
+    name="slider"
+    id="slider"
+    [min]="min"
+    [max]="max"
+    [step]="step"
+    [value]="value"
+    class="hidden"
+  />
+  <div #sliderContainer class="flex w-full items-center gap-1.5">
+    <div #activeTrack class="h-3 rounded-l-full bg-primary-700"></div>
+    <div
+      #thumb
+      class="h-8 w-1 cursor-ew-resize rounded bg-secondary-600 transition-transform hover:scale-x-150"
+      (mousedown)="onMouseDown($event)"
+    ></div>
+    <div
+      #inactiveTrack
+      class="h-3 flex-1 rounded-r-full bg-background-900"
+    ></div>
   </div>
 </div>

@@ -4,7 +4,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   selector: 'NumberInputComponent',
   standalone: true,
   imports: [],
-  templateUrl: './number-input.component.html'
+  templateUrl: './number-input.component.html',
 })
 export class NumberInputComponent {
   @Input() value: number = 0;

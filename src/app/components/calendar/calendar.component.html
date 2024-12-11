@@ -1,59 +1,143 @@
-<div class="w-full h-screen bg-background-950 text-text-100">
-    <div class="container mx-auto p-4">
-        <div class="">
-            <!-- Calendar Header -->
-            <div class="flex items-center justify-between px-6 py-4">
-                <h2 class="text-xl font-semibold">
-                    {{ shownDate() | date:'MMMM yyyy' }}
-                </h2>
-                <div class="flex gap-2 items-center">
-                    <!-- Buttons -->
-                    <IconButtonComponent icon="settings" title="Open settings" (callbackFunction)="openSettingsModal()" />
-                    <div class="h-8 w-1 rounded-full mx-4 bg-primary-800 opacity-80"></div>
-                    <IconButtonComponent icon="today" title="Go to current month" (callbackFunction)="goToCurrentMonth()" />
-                    <IconButtonComponent icon="chevron_left" (callbackFunction)="previousMonth()" />
-                    <IconButtonComponent icon="chevron_right" (callbackFunction)="nextMonth()" />
-                </div>
-            </div>
-
-            <!-- Calendar Grid -->
-            <div class="p-4">
-                <!-- Days of week -->
-                <div class="grid grid-cols-7 gap-2 mb-2">
-                    @for (day of weekDays(); track day) {
-                    <div class="text-center text-sm font-semibold">
-                        {{ day }}
-                    </div>
-                    }
-                </div>
-
-                <!-- Calendar days -->
-                <div class="grid grid-cols-7 gap-2">
-                    @for (week of daysInMonth(); track week) {
-                    @for (day of week; track $index) {
-                    <div class="aspect-video p-2 rounded-lg bg-background-900 transition-colors"
-                        [class.cursor-pointer]="day !== 0"
-                        [class.opacity-50]="day === 0"
-                        [class.bg-background-500]="day === 0"
-                        [class.hover:bg-background-800]="day !== 0"
-                        [class.active:bg-background-700]="day !== 0"
-                        (click)="openDayModal(day)">
-
-                        @if (day !== 0) {
-                        <p class="text-sm"
-                            [class.font-bold]="day === shownDate().getDate() && currentMonth === shownDate().getMonth()">
-                            {{ day }}
-                        </p>
-                        <!-- <MembershipInCalendarGrid /> -->
-                        }
-                    </div>
-                    }
-                    }
-                </div>
-            </div>
-        </div>
+<div class="h-screen w-full bg-background-50 text-text-950">
+  <div class="container mx-auto p-4">
+    <!-- Calendar Header -->
+    <div
+      class="flex flex-col items-center justify-between gap-4 px-6 py-4 md:flex-row md:items-center"
+    >
+      <div
+        class="flex flex-row text-center text-base sm:items-center md:text-xl"
+      >
+        <h2 class="font-semibold">{{ displayName() }}'s subscriptions</h2>
+        <SpacerComponent />
+        <h2 class="font-semibold">
+          {{ shownDate() | date: "MMMM yyyy" }}
+        </h2>
+      </div>
+      <div class="flex items-center gap-2">
+        <!-- Buttons -->
+        <IconButtonComponent
+          icon="settings"
+          title="Open settings"
+          variant="iconOnly"
+          (callbackFunction)="openSettingsModal()"
+        />
+        <SpacerComponent />
+        <ButtonComponent
+          label="Today"
+          variant="outline"
+          fontWeight="medium"
+          (callbackFunction)="goToCurrentMonth()"
+        />
+        <!-- <IconButtonComponent icon="today" title="Go to current month" (callbackFunction)="goToCurrentMonth()" /> -->
+        <IconButtonComponent
+          icon="chevron_left"
+          variant="iconOnly"
+          (callbackFunction)="previousMonth()"
+        />
+        <IconButtonComponent
+          icon="chevron_right"
+          variant="iconOnly"
+          (callbackFunction)="nextMonth()"
+        />
+        <IconButtonComponent
+          icon="add"
+          title="Add membership"
+          variant="iconOnly"
+          (callbackFunction)="openAddMembershipModal()"
+        />
+      </div>
     </div>
+
+    <!-- Calendar Grid -->
+    <div class="p-4">
+      <!-- Days of week -->
+      <div class="mb-2 grid grid-cols-7 gap-2 sm:hidden">
+        @for (day of weekDays(); track day) {
+          <div class="text-center text-sm font-semibold">
+            {{ day.slice(0, 3) }}
+          </div>
+        }
+      </div>
+      <div class="mb-2 hidden grid-cols-7 gap-2 sm:grid">
+        @for (day of weekDays(); track day) {
+          <div class="text-center text-sm font-semibold">
+            {{ day }}
+          </div>
+        }
+      </div>
+
+      <!-- Calendar days -->
+      <div class="grid grid-cols-7 gap-2">
+        @for (week of daysInMonth(); track week) {
+          @for (day of week; track $index) {
+            <div
+              class="group relative flex aspect-square flex-col rounded-lg bg-background-200 transition-colors sm:aspect-video sm:rounded-lg"
+              [class.cursor-pointer]="day !== 0"
+              [class.opacity-50]="day === 0"
+              [class.hover:bg-background-400]="day !== 0"
+              [class.active:bg-background-600]="day !== 0"
+              (click)="openDayModal(day)"
+            >
+              @if (day !== 0) {
+                  <div class="p-2 grow">
+                    <div class="mb-1 hidden flex-row justify-between sm:flex">
+                      <p
+                        class="text-sm"
+                        [class.font-bold]="
+                          day === shownDate().getDate() &&
+                          currentMonth === shownDate().getMonth()
+                        "
+                      >
+                        {{ day }}
+                      </p>
+                      @if (membershipsCountForDay(day) > 0) {
+                        <p class="hidden text-sm sm:block">
+                          {{ membershipsCountForDayText(day) }}
+                        </p>
+                      }
+                    </div>
+                    <div
+                      class="flex h-full w-full items-center justify-center sm:hidden"
+                    >
+                      <p
+                        class="block text-sm sm:hidden"
+                        [class.font-bold]="
+                          day === shownDate().getDate() &&
+                          currentMonth === shownDate().getMonth()
+                        "
+                      >
+                        {{ day }}
+                      </p>
+                    </div>
+                    <MembershipInCalendarGrid
+                      [memberships]="filterMembershipsForDate(getDayDate(day))"
+                      class="hidden 2xl:block"
+                    />
+                  </div>
+                  @if (membershipsCountForDay(day) > 0) {
+                    <div
+                      class="absolute bottom-0 left-0 right-0 h-1.5 rounded-bl-lg rounded-br-lg bg-background-500 sm:hidden"
+                    ></div>
+                  }
+              }
+            </div>
+          }
+        }
+      </div>
+    </div>
+  </div>
 </div>
 
-<DayModal [selectedDate]="selectedDate()!" />
-<SettingsModal [isStartOnMonday]="isStartOnMonday()" (toggleFirstDay)="handleToggleFirstDay()" />
+<DayModal
+  #dayModal
+  [selectedDate]="selectedDate()!"
+  (addMembershipClick)="handleAddMembershipClick()"
+  (membershipDeleted)="onMembershipChange()"
+  (membershipUpdated)="onMembershipChange()"
+/>
+<SettingsModal #settingsModal />
+<AddMembershipModal
+  #addMembershipModal
+  [selectedDate]="selectedDate()!"
+  (membershipCreated)="onMembershipChange()"
+/>

@@ -8,9 +8,8 @@ describe('MembershipInCalendarGridComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MembershipInCalendarGridComponent]
-    })
-    .compileComponents();
+      imports: [MembershipInCalendarGridComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MembershipInCalendarGridComponent);
     component = fixture.componentInstance;
